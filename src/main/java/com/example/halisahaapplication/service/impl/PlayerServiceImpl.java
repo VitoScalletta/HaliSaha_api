@@ -5,10 +5,12 @@ import com.example.halisahaapplication.entity.Player;
 import com.example.halisahaapplication.mapper.PlayerMapper;
 import com.example.halisahaapplication.repository.PlayerRepository;
 import com.example.halisahaapplication.service.PlayerService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class PlayerServiceImpl implements PlayerService {
 
     private final PlayerRepository playerRepository;
@@ -47,13 +49,13 @@ public class PlayerServiceImpl implements PlayerService {
         Player existingPlayer = playerRepository.findById(id).orElse(null);
         if (existingPlayer == null) return null;
 
-        existingPlayer.setIsim(playerDto.setIsim);
-        existingPlayer.setMevki(playerDto.setMevki());
-        existingPlayer.setYas(playerDto.setYas());
+        existingPlayer.setIsim(playerDto.getIsim());
+        existingPlayer.setMevki(playerDto.getMevki());
+        existingPlayer.setYas(playerDto.getYas());
 
-        Player updatedBook = playerRepository.save(existingPlayer);
+        Player updatedPlayer = playerRepository.save(existingPlayer);
 
-        return playerMapper.mapToDto(updatedBook);
+        return playerMapper.mapToDto(updatedPlayer);
     }
 
     @Override
@@ -61,5 +63,9 @@ public class PlayerServiceImpl implements PlayerService {
         if (playerRepository.existsById(id)){
             playerRepository.deleteById(id);
         }
+    }
+
+    public void addPlayerToMatch(Long playerId,Long matchId){
+
     }
 }
