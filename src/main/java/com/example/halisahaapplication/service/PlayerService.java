@@ -16,4 +16,6 @@ public interface PlayerService {
     PlayerDto updatePlayer(Long id,PlayerDto playerDto);
 
     void deletePlayer(Long id);
+
+    void addPlayerToMatch(Long playerId,Long matchId);
 }
