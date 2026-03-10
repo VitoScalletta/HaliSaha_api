@@ -29,8 +29,8 @@ public class Match {
     @ManyToMany
     @JoinTable(
             name = "match_players",
-            joinColumns = @JoinColumn(name = "id"),
-            inverseJoinColumns = @JoinColumn(name = "id")
+            joinColumns = @JoinColumn(name = "match_id"),
+            inverseJoinColumns = @JoinColumn(name = "player_id")
     )
     private List<Player> players;
 

@@ -3,7 +3,8 @@ package com.example.halisahaapplication.dto;
 public class PlayerDto {
     private String isim;
     private String mevki;
-    private Long yas;
+    private int yas;
+    private Long id;
 
     public String getIsim(){
         return isim;
@@ -11,7 +12,7 @@ public class PlayerDto {
     public String getMevki() {
         return mevki;
     }
-    public Long getYas() {
+    public int getYas() {
         return yas;
     }
 
@@ -21,7 +22,7 @@ public class PlayerDto {
     public void setMevki(String mevki) {
         this.mevki = mevki;
     }
-    public void setYas(Long yas) {
+    public void setYas(int yas) {
         this.yas = yas ;
     }
 

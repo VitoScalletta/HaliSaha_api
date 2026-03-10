@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class MatchDto {
     private int kontenjan;
-    private String saha_adi;
+    private String sahaAdi;
     private LocalDateTime tarih;
 
     public int getKontenjan() {
@@ -15,12 +15,12 @@ public class MatchDto {
         this.kontenjan = kontenjan;
     }
 
-    public String getSaha_adi() {
-        return saha_adi;
+    public String getSahaAdi() {
+        return sahaAdi;
     }
 
-    public void setSaha_adi(String saha_adi) {
-        this.saha_adi = saha_adi;
+    public void setSahaAdi(String sahaAdi) {
+        this.sahaAdi = sahaAdi;
     }
 
     public LocalDateTime getTarih() {
