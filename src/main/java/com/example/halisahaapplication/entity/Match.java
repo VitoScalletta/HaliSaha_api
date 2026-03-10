@@ -3,6 +3,7 @@ package com.example.halisahaapplication.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "matchs")
@@ -23,6 +24,22 @@ public class Match {
         this.tarih=tarih;
         this.kontenjan=kontenjan;
         this.sahaAdi=sahaAdi;
+    }
+
+    @ManyToMany
+    @JoinTable(
+            name = "match_players",
+            joinColumns = @JoinColumn(name = "id"),
+            inverseJoinColumns = @JoinColumn(name = "id")
+    )
+    private List<Player> players;
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
     }
 
     public Long getId() {

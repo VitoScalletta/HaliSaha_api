@@ -2,6 +2,8 @@ package com.example.halisahaapplication.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "players")
 public class Player {
@@ -23,6 +25,18 @@ public class Player {
         this.mevki = mevki;
         this.yas = yas;
     }
+
+    @ManyToMany(mappedBy = "players")
+    private List<Match> matches;
+
+    public List<Match> getMatches() {
+        return matches;
+    }
+
+    public void setMatches(List<Match> matches) {
+        this.matches = matches;
+    }
+
     public int getYas() {
         return yas;
     }
