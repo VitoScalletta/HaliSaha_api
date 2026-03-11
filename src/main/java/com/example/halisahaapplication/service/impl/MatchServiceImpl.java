@@ -28,13 +28,14 @@ public class MatchServiceImpl implements MatchService {
         LocalDateTime wantedDate = matchDto.getTarih();
         int wantedHour = wantedDate.getHour();
 
-        boolean ismatchAlreadyExists = matchRepository.existsBySahaAdiAndTarih(matchDto.getSahaAdi(),matchDto.getTarih());
-
         if (wantedDate.isBefore(now)){
             throw new RuntimeException("Hata :Geçmişe maç alamazsınız");
-        } else if (wantedHour <= 7 || wantedHour >= 2) {
+        }
+        if (wantedHour >= 2|| wantedHour < 10) {
             throw new RuntimeException("Hata:Çalışma Saatleri İçerisinde Bir Saat seçiniz");
-        } else if (ismatchAlreadyExists) {
+        }
+        boolean ismatchAlreadyExists = matchRepository.existsBySahaAdiAndTarih(matchDto.getSahaAdi(),matchDto.getTarih());
+        if (ismatchAlreadyExists) {
             throw new RuntimeException("Hata: Bu tarihte bir maç var zaten");
         }
 

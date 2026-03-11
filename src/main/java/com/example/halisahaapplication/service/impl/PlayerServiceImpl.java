@@ -1,8 +1,10 @@
 package com.example.halisahaapplication.service.impl;
 
 import com.example.halisahaapplication.dto.PlayerDto;
+import com.example.halisahaapplication.entity.Match;
 import com.example.halisahaapplication.entity.Player;
 import com.example.halisahaapplication.mapper.PlayerMapper;
+import com.example.halisahaapplication.repository.MatchRepository;
 import com.example.halisahaapplication.repository.PlayerRepository;
 import com.example.halisahaapplication.service.PlayerService;
 import org.springframework.stereotype.Service;
@@ -15,10 +17,15 @@ public class PlayerServiceImpl implements PlayerService {
 
     private final PlayerRepository playerRepository;
     private final PlayerMapper playerMapper;
+    private final MatchRepository matchRepository;
 
-    public PlayerServiceImpl(PlayerRepository playerRepository, PlayerMapper playerMapper) {
+    public PlayerServiceImpl(
+            PlayerRepository playerRepository,
+            PlayerMapper playerMapper,
+            MatchRepository matchRepository) {
         this.playerRepository = playerRepository;
         this.playerMapper = playerMapper;
+        this.matchRepository=matchRepository;
     }
 
     @Override
@@ -66,6 +73,12 @@ public class PlayerServiceImpl implements PlayerService {
     }
     @Override
     public void addPlayerToMatch(Long playerId,Long matchId){
+      Player player = playerRepository.findById(playerId).orElse(null);
+      if (player == null){
+          throw new RuntimeException("Böyle bir oyuncu yok");
+      }
 
+      Match match = matchRepository.findById(matchId).orElse(null);
+      if(match == nu)
     }
 }
