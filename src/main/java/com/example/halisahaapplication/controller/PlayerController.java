@@ -2,6 +2,7 @@ package com.example.halisahaapplication.controller;
 
 import com.example.halisahaapplication.dto.PlayerDto;
 import com.example.halisahaapplication.service.PlayerService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,9 +33,12 @@ public class PlayerController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PlayerDto>> getAllPlayers(){
-        List<PlayerDto> players = playerService.getAllPLayers();
-        return ResponseEntity.ok(players);
+    public ResponseEntity<Page<PlayerDto>> getAllPlayers(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ){
+        Page<PlayerDto> playerDtoPage = playerService.getAllPLayers(page,size);
+        return ResponseEntity.ok(playerDtoPage);
     }
 
     @PutMapping("/{id}")

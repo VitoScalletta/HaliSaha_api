@@ -7,6 +7,9 @@ import com.example.halisahaapplication.mapper.PlayerMapper;
 import com.example.halisahaapplication.repository.MatchRepository;
 import com.example.halisahaapplication.repository.PlayerRepository;
 import com.example.halisahaapplication.service.PlayerService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -45,11 +48,10 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public List<PlayerDto> getAllPLayers() {
-        List<Player> players = playerRepository.findAll();
-        return players.stream()
-                .map(player -> playerMapper.mapToDto(player))
-                .collect(Collectors.toList());
+    public Page<PlayerDto> getAllPLayers(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Player> playerPage = playerRepository.findAll(pageable);
+        return playerPage.map(playerMapper::mapToDto);
     }
 
     @Override

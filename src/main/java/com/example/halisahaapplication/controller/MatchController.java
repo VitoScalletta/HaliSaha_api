@@ -2,6 +2,7 @@ package com.example.halisahaapplication.controller;
 
 import com.example.halisahaapplication.dto.MatchDto;
 import com.example.halisahaapplication.service.MatchService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,9 +32,12 @@ public class MatchController {
     }
 
     @GetMapping
-    public ResponseEntity<List<MatchDto>> getAllMatches(){
-        List<MatchDto> matches = matchService.getAllMatchs();
-        return ResponseEntity.ok(matches);
+    public ResponseEntity<Page<MatchDto>> getAllMatches(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ){
+        Page<MatchDto> matchDtoPage = matchService.getAllMatchs(page,size);
+        return ResponseEntity.ok(matchDtoPage);
     }
 
     @PutMapping("/{id}")

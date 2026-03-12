@@ -5,6 +5,9 @@ import com.example.halisahaapplication.entity.Match;
 import com.example.halisahaapplication.mapper.MatchMapper;
 import com.example.halisahaapplication.repository.MatchRepository;
 import com.example.halisahaapplication.service.MatchService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -53,11 +56,10 @@ public class MatchServiceImpl implements MatchService {
     }
 
     @Override
-    public List<MatchDto> getAllMatchs() {
-        List<Match> matchs = matchRepository.findAll();
-        return matchs.stream()
-                .map(match -> matchMapper.mapToDto(match))
-                .collect(Collectors.toList());
+    public Page<MatchDto> getAllMatchs(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Match> matchPage = matchRepository.findAll(pageable);
+        return matchPage.map(match -> matchMapper.mapToDto(match));
     }
 
     @Override
