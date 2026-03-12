@@ -88,7 +88,7 @@ public class PlayerServiceImpl implements PlayerService {
           throw new RuntimeException("Hata : Kontenjan dolu");
       }
 
-      if (match.getPlayers().contains(player.getId())){
+      if (match.getPlayers().contains(player)){
           throw new RuntimeException("Hata : Bu oyuncu maça zaten ekli");
       }
 

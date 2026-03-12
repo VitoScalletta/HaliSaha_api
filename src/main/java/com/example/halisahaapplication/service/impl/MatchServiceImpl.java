@@ -31,7 +31,7 @@ public class MatchServiceImpl implements MatchService {
         if (wantedDate.isBefore(now)){
             throw new RuntimeException("Hata :Geçmişe maç alamazsınız");
         }
-        if (wantedHour >= 2|| wantedHour < 10) {
+        if (wantedHour >= 2 && wantedHour < 10) {
             throw new RuntimeException("Hata:Çalışma Saatleri İçerisinde Bir Saat seçiniz");
         }
         boolean ismatchAlreadyExists = matchRepository.existsBySahaAdiAndTarih(matchDto.getSahaAdi(),matchDto.getTarih());

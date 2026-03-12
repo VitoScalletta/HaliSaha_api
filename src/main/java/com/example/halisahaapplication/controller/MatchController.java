@@ -1,7 +1,6 @@
 package com.example.halisahaapplication.controller;
 
 import com.example.halisahaapplication.dto.MatchDto;
-import com.example.halisahaapplication.entity.Player;
 import com.example.halisahaapplication.service.MatchService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +25,7 @@ public class MatchController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MatchDto> getMatcById(@PathVariable Long id){
+    public ResponseEntity<MatchDto> getMatchById(@PathVariable Long id){
         MatchDto matchDto = matchService.getMatchById(id);
         return ResponseEntity.ok(matchDto);
     }
