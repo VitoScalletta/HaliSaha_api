@@ -9,6 +9,7 @@ import com.example.halisahaapplication.repository.PlayerRepository;
 import com.example.halisahaapplication.service.PlayerService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -79,6 +80,27 @@ public class PlayerServiceImpl implements PlayerService {
       }
 
       Match match = matchRepository.findById(matchId).orElse(null);
-      if(match == nu)
+      if(match == null){
+          throw new RuntimeException("Hata: Maç bulunamadı");
+      }
+
+      if (match.getPlayers().size() >= match.getKontenjan()){
+          throw new RuntimeException("Hata : Kontenjan dolu");
+      }
+
+      if (match.getPlayers().contains(player.getId())){
+          throw new RuntimeException("Hata : Bu oyuncu maça zaten ekli");
+      }
+
+      List<Match> playerMatches = player.getMatches();
+      LocalDateTime matchTime = match.getTarih();
+      for (Match existingMatch : playerMatches){
+          if (existingMatch.getTarih().isEqual(matchTime)){
+              throw new RuntimeException("Hata : Bu oyuncunun aynı saatte maçı var");
+          }
+      }
+
+      match.getPlayers().add(player);
+      matchRepository.save(match);
     }
 }
