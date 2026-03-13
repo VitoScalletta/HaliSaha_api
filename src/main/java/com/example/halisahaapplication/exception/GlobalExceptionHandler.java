@@ -15,7 +15,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handlerResourceNotFound(ResourceNotFoundException exception){
         ErrorResponse errorBox = new ErrorResponse(
                 exception.getMessage(),
-                    400,
+                    404,
                 LocalDateTime.now()
         );
         return new ResponseEntity<>(errorBox, HttpStatus.BAD_REQUEST);

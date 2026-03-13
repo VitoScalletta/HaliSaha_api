@@ -19,7 +19,7 @@ public class PlayerController {
     }
 
     @PostMapping
-    public ResponseEntity<PlayerDto> createPlayer(PlayerDto playerDto){
+    public ResponseEntity<PlayerDto> createPlayer(@RequestBody PlayerDto playerDto){
         PlayerDto savedPlayer = playerService.createPlayer(playerDto);
 
         return new ResponseEntity<>(savedPlayer, HttpStatus.CREATED);

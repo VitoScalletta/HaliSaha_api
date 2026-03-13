@@ -19,7 +19,7 @@ public class MatchController {
     }
 
     @PostMapping
-    public ResponseEntity<MatchDto> createMatch(MatchDto matchDto){
+    public ResponseEntity<MatchDto> createMatch(@RequestBody MatchDto matchDto){
         MatchDto savedMatch = matchService.createMatch(matchDto);
 
         return new ResponseEntity<>(savedMatch, HttpStatus.CREATED);

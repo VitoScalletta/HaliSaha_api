@@ -4,6 +4,7 @@ import com.example.halisahaapplication.dto.PlayerDto;
 import com.example.halisahaapplication.entity.Match;
 import com.example.halisahaapplication.entity.Player;
 import com.example.halisahaapplication.exception.BusinessRuleException;
+import com.example.halisahaapplication.exception.ResourceNotFoundException;
 import com.example.halisahaapplication.mapper.PlayerMapper;
 import com.example.halisahaapplication.repository.MatchRepository;
 import com.example.halisahaapplication.repository.PlayerRepository;
@@ -42,8 +43,8 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public PlayerDto getPlayerById(Long id) {
-        Player player  = playerRepository.findById(id).orElse(null);
-        if (player == null) return null;
+        Player player  = playerRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Hata : oyuncu bulunamadı "));
 
         return playerMapper.mapToDto(player);
     }
@@ -57,8 +58,8 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public PlayerDto updatePlayer(Long id, PlayerDto playerDto) {
-        Player existingPlayer = playerRepository.findById(id).orElse(null);
-        if (existingPlayer == null) return null;
+        Player existingPlayer = playerRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Hata : oyuncu bulunamadı"));
 
         existingPlayer.setIsim(playerDto.getIsim());
         existingPlayer.setMevki(playerDto.getMevki());
@@ -99,7 +100,7 @@ public class PlayerServiceImpl implements PlayerService {
       LocalDateTime matchTime = match.getTarih();
       for (Match existingMatch : playerMatches){
           if (existingMatch.getTarih().isEqual(matchTime)){
-              throw new RuntimeException("Hata : Bu oyuncunun aynı saatte maçı var");
+              throw new BusinessRuleException("Hata : Bu oyuncunun aynı saatte maçı var");
           }
       }
 
