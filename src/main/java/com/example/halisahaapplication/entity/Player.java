@@ -27,7 +27,7 @@ public class Player {
     }
 
     @ManyToMany(mappedBy = "players")
-    private List<Match> matches;
+    private List<Match> matches = new java.util.ArrayList<>();
 
     public List<Match> getMatches() {
         return matches;

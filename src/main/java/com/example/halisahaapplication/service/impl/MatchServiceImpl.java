@@ -2,6 +2,7 @@ package com.example.halisahaapplication.service.impl;
 
 import com.example.halisahaapplication.dto.MatchDto;
 import com.example.halisahaapplication.entity.Match;
+import com.example.halisahaapplication.exception.BusinessRuleException;
 import com.example.halisahaapplication.mapper.MatchMapper;
 import com.example.halisahaapplication.repository.MatchRepository;
 import com.example.halisahaapplication.service.MatchService;
@@ -32,14 +33,14 @@ public class MatchServiceImpl implements MatchService {
         int wantedHour = wantedDate.getHour();
 
         if (wantedDate.isBefore(now)){
-            throw new RuntimeException("Hata :Geçmişe maç alamazsınız");
+            throw new BusinessRuleException("Hata :Geçmişe maç alamazsınız");
         }
         if (wantedHour >= 2 && wantedHour < 10) {
-            throw new RuntimeException("Hata:Çalışma Saatleri İçerisinde Bir Saat seçiniz");
+            throw new BusinessRuleException("Hata:Çalışma Saatleri İçerisinde Bir Saat seçiniz");
         }
         boolean ismatchAlreadyExists = matchRepository.existsBySahaAdiAndTarih(matchDto.getSahaAdi(),matchDto.getTarih());
         if (ismatchAlreadyExists) {
-            throw new RuntimeException("Hata: Bu tarihte bir maç var zaten");
+            throw new BusinessRuleException("Hata: Bu tarihte bir maç var zaten");
         }
 
         Match match = matchMapper.mapFromDto(matchDto);

@@ -53,4 +53,13 @@ public class PlayerController {
         return ResponseEntity.ok("Oyuncu Başarıyla silindi");
     }
 
+    @PostMapping("/{playerId}/matches/{matchId}")
+    public ResponseEntity<String> addPlayerToMatch(
+            @PathVariable Long playerId,
+            @PathVariable Long matchId
+    ){
+        playerService.addPlayerToMatch(playerId,matchId);
+        return ResponseEntity.ok("Oyuncu Başarıyla kaydedildi");
+    }
+
 }

@@ -32,7 +32,7 @@ public class Match {
             joinColumns = @JoinColumn(name = "match_id"),
             inverseJoinColumns = @JoinColumn(name = "player_id")
     )
-    private List<Player> players;
+    private List<Player> players = new java.util.ArrayList<>();
 
     public List<Player> getPlayers() {
         return players;

@@ -14,7 +14,7 @@ public class DataInitializer implements CommandLineRunner {
     private PlayerRepository playerRepository;
     private MatchRepository matchRepository;
 
-    public DataInitializer(PlayerRepository playerRepository) {
+    public DataInitializer(PlayerRepository playerRepository,MatchRepository matchRepository) {
         this.playerRepository = playerRepository;
         this.matchRepository = matchRepository;
     }

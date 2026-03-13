@@ -3,6 +3,7 @@ package com.example.halisahaapplication.service.impl;
 import com.example.halisahaapplication.dto.PlayerDto;
 import com.example.halisahaapplication.entity.Match;
 import com.example.halisahaapplication.entity.Player;
+import com.example.halisahaapplication.exception.BusinessRuleException;
 import com.example.halisahaapplication.mapper.PlayerMapper;
 import com.example.halisahaapplication.repository.MatchRepository;
 import com.example.halisahaapplication.repository.PlayerRepository;
@@ -78,20 +79,20 @@ public class PlayerServiceImpl implements PlayerService {
     public void addPlayerToMatch(Long playerId,Long matchId){
       Player player = playerRepository.findById(playerId).orElse(null);
       if (player == null){
-          throw new RuntimeException("Böyle bir oyuncu yok");
+          throw new BusinessRuleException("Böyle bir oyuncu yok");
       }
 
       Match match = matchRepository.findById(matchId).orElse(null);
       if(match == null){
-          throw new RuntimeException("Hata: Maç bulunamadı");
+          throw new BusinessRuleException("Hata: Maç bulunamadı");
       }
 
       if (match.getPlayers().size() >= match.getKontenjan()){
-          throw new RuntimeException("Hata : Kontenjan dolu");
+          throw new BusinessRuleException("Hata : Kontenjan dolu");
       }
 
       if (match.getPlayers().contains(player)){
-          throw new RuntimeException("Hata : Bu oyuncu maça zaten ekli");
+          throw new BusinessRuleException(  "Hata : Bu oyuncu maça zaten ekli");
       }
 
       List<Match> playerMatches = player.getMatches();
