@@ -32,3 +32,16 @@ Projenin veritabanına bağlanabilmesi için `src/main/resources/application.pro
 spring.datasource.url=jdbc:postgresql://localhost:5433/halisaha_db
 spring.datasource.username=KENDI_KULLANICI_ADINIZ
 spring.datasource.password=KENDI_SIFRENIZ
+***
+
+### 2. Uygulamayı Başlatma
+Veritabanı hazır olduktan sonra, terminalinizden proje kök dizinine giderek projeyi çalıştırın:
+
+```bash
+./mvnw spring-boot:run
+
+3. API Dokümantasyonu (Swagger)
+
+Proje başarıyla çalıştıktan sonra, API'nin tüm uç noktalarını (endpoints) interaktif bir şekilde incelemek ve test istekleri atmak için tarayıcınızdan şu adrese gidin:
+
+👉 http://localhost:8080/swagger-ui/index.html
