@@ -18,7 +18,7 @@ public class GlobalExceptionHandler {
                     404,
                 LocalDateTime.now()
         );
-        return new ResponseEntity<>(errorBox, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(errorBox, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(BusinessRuleException.class)
