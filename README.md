@@ -33,11 +33,10 @@ spring.datasource.url=jdbc:postgresql://localhost:5433/halisaha_db
 spring.datasource.username=KENDI_KULLANICI_ADINIZ
 spring.datasource.password=KENDI_SIFRENIZ
 ***
-
+```
 ### 2. Uygulamayı Başlatma
 Veritabanı hazır olduktan sonra, terminalinizden proje kök dizinine giderek projeyi çalıştırın:
 
-```bash
 ./mvnw spring-boot:run
 
 3. API Dokümantasyonu (Swagger)
